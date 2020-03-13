@@ -1,0 +1,75 @@
+@import "~reset-css";
+@import "theming";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 12px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .gutter-vertical {
+    background-color: map-get(map-get($latafi-app-theme, 'background'), 'backgroundAccent');
+    cursor: n-resize;
+  }
+  .gutter-horizontal {
+    background-color: map-get(map-get($latafi-app-theme, 'background'), 'backgroundAccent');
+    cursor: w-resize;
+  }
+
+  .mat-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .material-icons {
+    font-size: 18px;
+  }
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    line-height: 36px;
+  }
+
+
+  .cide-component {
+
+    &.latafi-resizable {
+      border: 1px solid blue;
+    }
+
+    .latafi-resizer {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 1px solid blue;
+      transform: translate(-50%, -50%);
+      background-color: white;
+    }
+    .latafi-resizer-top {
+      left: 50%;
+      top: 0;
+    }
+    .latafi-resizer-right {
+      left: 100%;
+      top: 50%;
+    }
+    .latafi-resizer-bottom {
+      left: 50%;
+      top: 100%;
+    }
+    .latafi-resizer-left {
+      left: 0;
+      top: 50%;
+    }
+  }
+}
+
+@include mat-core();
+@include angular-material-theme($latafi-app-theme);

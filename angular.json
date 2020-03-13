@@ -1,9 +1,169 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": "bb78f5fc-e900-4da6-a850-93b41039f55a"
   },
   "newProjectRoot": "features",
-  "projects": {}
+  "projects": {
+    "@latafi/base-application": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "features/@latafi/base-application",
+      "sourceRoot": "features/@latafi/base-application/src",
+      "prefix": "ltfi",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/@latafi/base-application",
+            "index": "features/@latafi/base-application/src/index.html",
+            "main": "features/@latafi/base-application/src/main.ts",
+            "polyfills": "features/@latafi/base-application/src/polyfills.ts",
+            "tsConfig": "features/@latafi/base-application/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "features/@latafi/base-application/src/favicon.ico",
+              "features/@latafi/base-application/src/assets"
+            ],
+            "styles": [
+              "features/@latafi/base-application/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "features/@latafi/base-application/src/environments/environment.ts",
+                  "with": "features/@latafi/base-application/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "hmr": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            }
+          }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "@latafi/base-application:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "@latafi/base-application:build:production"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "calpvin-ide:build:hmr"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@latafi/base-application:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "features/@latafi/base-application/src/test.ts",
+            "polyfills": "features/@latafi/base-application/src/polyfills.ts",
+            "tsConfig": "features/@latafi/base-application/tsconfig.spec.json",
+            "karmaConfig": "features/@latafi/base-application/karma.conf.js",
+            "assets": [
+              "features/@latafi/base-application/src/favicon.ico",
+              "features/@latafi/base-application/src/assets"
+            ],
+            "styles": [
+              "features/@latafi/base-application/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+                "features/@latafi/base-application/tsconfig.app.json",
+                "features/@latafi/base-application/tsconfig.spec.json",
+                "features/@latafi/base-application/e2e/tsconfig.json"
+              ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+          "e2e": {
+            "builder": "@angular-devkit/build-angular:protractor",
+            "options": {
+              "protractorConfig": "features/@latafi/base-application/e2e/protractor.conf.js",
+              "devServerTarget": "@latafi/base-application:serve"
+            },
+            "configurations": {
+              "production": {
+                "devServerTarget": "@latafi/base-application:serve:production"
+              }
+            }
+          }
+      }
+    },
+  "defaultProject": "@latafi/base-application"
 }
